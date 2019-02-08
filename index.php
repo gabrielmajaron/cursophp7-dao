@@ -27,13 +27,18 @@ require_once("config.php");
 //$usuario->login("admin","admin");
 //echo $usuario;
 
-$aluno = new Usuario();
+//$aluno = new Usuario();
+//$aluno->setLogin("aluno");
+//$aluno->setSenha("123456");
+//$aluno->insert(); // obs. internamente é chamado uma procedure!
+//echo $aluno;
 
-$aluno->setLogin("aluno");
-$aluno->setSenha("123456");
 
-$aluno->insert();
+$usuario = new Usuario();
 
-echo $aluno;
+$usuario->loadById(2);
 
+$usuario->update("professor","!@#¨!@#");
+
+echo $usuario;
  ?>	

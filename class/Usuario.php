@@ -141,6 +141,19 @@ class Usuario {
 		}
 	}	
 
+	public function update($login, $senha){
+		$sql = new Sql();
+
+		$this->setLogin($login);
+		$this->setSenha($senha);
+
+		$sql->query("UPDATE tb_usuarios SET login = :LOGIN, senha = :SENHA WHERE id = :ID", array(
+			":LOGIN"=>$this->getLogin(),
+			":SENHA"=>$this->getSenha(),
+			":ID"=>$this->getIdusuario()
+		));
+	}
+
 
 }
 
