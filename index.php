@@ -22,10 +22,18 @@ require_once("config.php");
 //$search = Usuario::search("a");
 //echo json_encode($search);
 
+// carrega usuario verificando o usuario e senha
+//$usuario = new Usuario();
+//$usuario->login("admin","admin");
+//echo $usuario;
 
-$usuario = new Usuario();
-$usuario->login("admin","admin");
+$aluno = new Usuario();
 
-echo $usuario;
+$aluno->setLogin("aluno");
+$aluno->setSenha("123456");
+
+$aluno->insert();
+
+echo $aluno;
 
  ?>	

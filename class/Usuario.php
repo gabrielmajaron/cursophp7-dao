@@ -4,6 +4,12 @@ class Usuario {
 
 	private $idusuario, $login, $senha, $dtcadastro;
 
+
+	public function __construct($login = "", $senha = ""){
+		$this->setLogin($login);
+		$this->setSenha($senha);
+	}
+
 	public function getIdusuario()
 	{
 	    return $this->idusuario;
@@ -58,12 +64,8 @@ class Usuario {
 
 		//ou  isset($results))
 		if(count($results)>0){
-			$row = $results[0];
 
-			$this->setIdusuario($row['id']);
-			$this->setLogin($row['login']);
-			$this->setSenha($row['senha']);
-			$this->setDtcadastro(new DateTime($row['cadastro']));
+			$this->setData($results[0]);
 		}
 
 	}
@@ -107,18 +109,37 @@ class Usuario {
 
 		//ou  isset($results))
 		if(count($results)>0){
-			$row = $results[0];
 
-			$this->setIdusuario($row['id']);
-			$this->setLogin($row['login']);
-			$this->setSenha($row['senha']);
-			$this->setDtcadastro(new DateTime($row['cadastro']));
+			$this->setData($results[0]);
 		}
 		else{
 			throw new Exception("Login e/ou senha inválidos");
 
 	}
+	}	
+
+	public function setData($data){
+		$this->setIdusuario($data['id']);
+		$this->setLogin($data['login']);
+		$this->setSenha($data['senha']);
+		$this->setDtcadastro(new DateTime($data['cadastro']));
+	}
+
+	public function insert(){
+		$sql = new Sql();
+								//procedure CALL, se for em SQLserver é EXECUTE
+		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :SENHA)", array(
+			':LOGIN'=>$this->getLogin(),
+			':SENHA'=>$this->getSenha()
+
+		));
+
+		if(count($results)>0)
+			$this->setData($results[0]);
+		else{
+			throw new Exception("Falha ao inserir dados");
 		}
+	}	
 
 
 }
