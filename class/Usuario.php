@@ -8,6 +8,7 @@ class Usuario {
 	public function __construct($login = "", $senha = ""){
 		$this->setLogin($login);
 		$this->setSenha($senha);
+		$this->setDtcadastro(new DateTime());
 	}
 
 	public function getIdusuario()
@@ -154,6 +155,17 @@ class Usuario {
 		));
 	}
 
+	public function delete(){
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuarios WHERE id = :ID", array(":ID"=>$this->getIdusuario()));
+
+		$this->setIdusuario(0);
+		$this->setLogin("");
+		$this->setSenha("");
+		$this->setDtcadastro(new DateTime());
+	}
 
 }
 

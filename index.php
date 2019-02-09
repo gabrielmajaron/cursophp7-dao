@@ -34,11 +34,25 @@ require_once("config.php");
 //echo $aluno;
 
 
-$usuario = new Usuario();
+// update
+//$usuario->loadById(2);
+//$usuario->update("professor","!@#¨!@#");
+//echo $usuario;
 
-$usuario->loadById(2);
 
-$usuario->update("professor","!@#¨!@#");
+//delete com busca (podemos usar também o loadById) $aluno->loadById(2);
+//$alunos = Usuario::search("aluno");
+//if(isset($alunos))
+//{
+	//$aluno = new Usuario("","");
+	//$aluno->setIdUsuario($alunos[0]["id"]);
+//
+	//$aluno->delete();
+	//echo "Deletou";
+//}
+//else
+	//echo "Usuario \"Aluno\" não encontrado";
 
-echo $usuario;
+
+
  ?>	
